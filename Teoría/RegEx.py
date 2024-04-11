@@ -25,6 +25,8 @@ pattern = r"\W"  # Matches any non-word character
 text = "Hello, world!"
 matches = re.findall(pattern, text)
 
+g.replace("Mary", "Bob")
+
 print("Matches:", matches)
 
 s2 = "Michael Jackson was a singer and known as the 'King of Pop'"
@@ -53,3 +55,17 @@ new_string = re.sub(pattern, replacement, s2, flags=re.IGNORECASE)
 
 # The new_string contains the original string with the pattern replaced by the replacement string
 print(new_string) 
+
+#Split the substring into list
+name = "Michael Jackson"
+split_string = (name.split())
+split_string
+
+s3 = "House number- 1105"
+# Write your code below and press Shift+Enter to execute
+result = re.search("\d", s3)
+
+if result:
+    print ("Digit found")
+else:
+    print("Digit not found")
