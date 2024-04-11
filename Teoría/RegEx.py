@@ -10,3 +10,13 @@ Regular expressions (RegEx) are patterns used to match and manipulate strings of
 |\S|Matches any non-whitespace character|"hello_world" matches "\S\S\S\S\S\S\S\S\S"|
 |\b|Matches the boundary between a word character and a non-word character|"cat" matches "\bcat\b" in "The cat sat on the mat"|
 |\B|Matches any position that is not a word boundary|"cat" matches "\Bcat\B" in "category" but not in "The cat sat on the mat"|
+
+
+pattern = r"\d\d\d\d\d\d\d\d\d\d"  # Matches any ten consecutive digits
+text = "My Phone number is 1234567890"
+match = re.search(pattern, text)
+
+if match:
+    print("Phone number found:", match.group())
+else:
+    print("No match")
