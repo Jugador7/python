@@ -20,3 +20,36 @@ if match:
     print("Phone number found:", match.group())
 else:
     print("No match")
+
+pattern = r"\W"  # Matches any non-word character
+text = "Hello, world!"
+matches = re.findall(pattern, text)
+
+print("Matches:", matches)
+
+s2 = "Michael Jackson was a singer and known as the 'King of Pop'"
+
+
+# Use the findall() function to find all occurrences of the "as" in the string
+result = re.findall("as", s2)
+
+# Print out the list of matched words
+print(result)
+
+# Use the split function to split the string by the "\s"
+split_array = re.split("\s", s2)
+
+# The split_array contains all the substrings, split by whitespace characters
+print(split_array)
+
+# Define the regular expression pattern to search for
+pattern = r"King of Pop"
+
+# Define the replacement string
+replacement = "legend"
+
+# Use the sub function to replace the pattern with the replacement string
+new_string = re.sub(pattern, replacement, s2, flags=re.IGNORECASE)
+
+# The new_string contains the original string with the pattern replaced by the replacement string
+print(new_string) 
