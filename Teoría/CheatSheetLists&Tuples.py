@@ -131,14 +131,14 @@ new_dict = dict_name.copy()
 Example:
 new_person = person.copy() 
 new_person = dict(person) # another way to create a copy of dictionary
-Copied!
+
 
 Creating a Dictionary	A dictionary is a built-in data type that represents a collection of key-value pairs. Dictionaries are enclosed in curly braces `{}`.	Example:
 dict_name = {} #Creates an empty dictionary 
 person = { "name": "John", "age": 30, "city": "New York"}
 Copied!
-del	Removes the specified key-value pair from the dictionary. Raises a `KeyError` if the key does not exist.	Syntax:
-1
+del	Removes the specified key-value pair from the dictionary. Raises a `KeyError` if the key does not exist.	
+Syntax:
 del dict_name[key] 
 Example:
 del person["Country"]
@@ -150,34 +150,25 @@ info = list(person.items())
 key existence	You can check for the existence of a key in a dictionary using the `in` keyword	Example:
 if "name" in person: 
     print("Name exists in the dictionary.")
-Copied!
+
 keys()	Retrieves all keys from the dictionary and converts them into a list. Useful for iterating or processing keys using list methods.	Syntax:
-1
 keys_list = list(dict_name.keys()) 
 Copied!
 Example:
 
-1
 person_keys = list(person.keys())
-Copied!
 update()	The `update()` method merges the provided dictionary into the existing dictionary, adding or updating key-value pairs.	Syntax:
-1
 dict_name.update({key: value}) 
 Copied!
 Example:
-
-1
 person.update({"Profession": "Doctor"})
-Copied!
-values()	Extracts all values from the dictionary and converts them into a list. This list can be used for further processing or analysis.	Syntax:
-1
-values_list = list(dict_name.values()) 
-Copied!
-Example:
 
-1
+values()	Extracts all values from the dictionary and converts them into a list. This list can be used for further processing or analysis.	Syntax:
+values_list = list(dict_name.values()) 
+Example:
 person_values = list(person.values())
-Copied!
+
+
 Sets
 Package/Method	Description	Code Example
 add()	Elements can be added to a set using the `add()` method. Duplicates are automatically removed, as sets only store unique values.	Syntax:
