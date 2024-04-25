@@ -83,3 +83,100 @@ remove_element(my_list, 55)  # This will print a message since 55 is not in the 
 
 # Print the updated list
 print("Updated list:", my_list)
+
+
+help(add)
+
+#Compare Two Strings Directly using in operator
+# add string
+string= "Michael Jackson is the best"
+
+# Define a funtion
+def check_string(text):
+    
+# Use if else statement and 'in' operatore to compare the string
+    if text in string:
+        return 'String matched'
+    else:
+        return 'String not matched'
+
+check_string("Michael Jackson is the best")
+
+#Compare two strings using == operator and function
+def compareStrings(x, y):
+# Use if else statement to compare x and y
+    if x==y:
+        return 1
+    
+# Declare two different variables as string1 and string2 and pass string in it
+string1 = "Michael Jackson is the best"
+string2 = "Michael Jackson is the best"
+
+# Declare a variable to store result after comparing both the strings
+check = compareStrings(string1, string2)
+
+#Use if else statement to compare the string
+if check==1:
+    print("\nString Matched")
+else:
+    print("\nString not Matched")
+
+# Python Program to Count words in a String using Dictionary
+def freq(string):
+    
+    #step1: A list variable is declared and initialized to an empty list.
+    words = []
+    
+    #step2: Break the string into list of words
+    words = string.split() # or string.lower().split()
+    
+    #step3: Declare a dictionary
+    Dict = {}
+    
+    #step4: Use for loop to iterate words and values to the dictionary
+    for key in words:
+        Dict[key] = words.count(key)
+        
+    #step5: Print the dictionary
+    print("The Frequency of words is:",Dict)
+    
+#step6: Call function and pass string in it
+freq("Amo a Bald mucho mucho")
+
+def printAll(*args): # All the arguments are 'packed' into args which can be treated like a tuple
+    print("No of arguments:", len(args)) 
+    for argument in args:
+        print(argument)
+#printAll with 3 arguments
+printAll('Horsefeather','Adonis','Bone')
+#printAll with 4 arguments
+printAll('Sidecar','Long Island','Mudslide','Carriage')
+
+def printDictionary(**args):
+    for key in args:
+        print(key + " : " + args[key])
+
+printDictionary(Country='Canada',Province='Ontario',City='Toronto')
+
+# Python Program to Count words in a String using Dictionary
+def freq(string,passedkey):
+
+    #step1: A list variable is declared and initialized to an empty list.
+    words = []
+
+    #step2: Break the string into list of words
+    words = string.split() # or string.lower().split()
+
+    #step3: Declare a dictionary
+    Dict = {}
+
+    #step4: Use for loop to iterate words and values to the dictionary
+    for key in words:
+        if(key == passedkey):
+            Dict[key] = words.count(key)   
+    #step5: Print the dictionary
+    print("Total Count:",Dict)
+
+#step6: Call function and pass string in it
+freq("Mary had a little lamb Little lamb, little lamb Mary had a little lamb.Its fleece was white as snow And everywhere that Mary went Mary went, Mary went \
+Everywhere that Mary went The lamb was sure to go","little")
