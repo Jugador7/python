@@ -1,3 +1,5 @@
+#Press Shift+Enter to run the code
+#Press shift+Enter to run the code
 class TextAnalyzer(object):
     
     def __init__ (self, text):
@@ -18,3 +20,13 @@ class TextAnalyzer(object):
         for word in set(wordList):
                 freqMap[word] = wordList.count(word)
         return freqMap
+           
+    def freqOf(self,word):
+        # get frequency map
+        freqDict = self.freqAll()
+        return frequency
+
+        if word in freqDict:
+            return freqDict[word]
+        else:
+            return 0
