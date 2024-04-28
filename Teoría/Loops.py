@@ -17,6 +17,11 @@ fruits = ["apple", "banana", "orange"]
 for index, fruit in enumerate(fruits):
     print(f"At position {index}, I found a {fruit}")
 
+for num in range(1, 6):
+    if num == 3:
+        break
+    print(num)
+
 while condition:
     # Code to be executed while the condition is true
     # Indentation is crucial to indicate the scope of the loop
