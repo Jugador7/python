@@ -88,3 +88,11 @@ df1
 
 x = df1['Student']
 x
+
+
+new_index=['a','b','c','d','e','f','g','h']
+
+df_new=df
+df_new.index=new_index
+df_new.loc['a', 'Artist']
+df_new.loc['a':'d', 'Artist']
