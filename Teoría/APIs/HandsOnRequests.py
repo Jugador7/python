@@ -14,9 +14,7 @@ print(r.request.headers)
 
 print("request body:", r.request.body)
 
-header=r.he
-
-aders
+header=r.headers
 print(r.headers)
 
 header['date']
