@@ -41,3 +41,10 @@ class QuotesSpider(scrapy.Spider):
 from selenium import webdriver
 driver = webdriver.Firefox()
 driver.get("http://www.example.com")
+
+#Price Comparison: Services such as ParseHub use web scraping to collect data from online shopping websites and use it to compare the prices of products.
+
+#Email address gathering: Many companies that use email as a medium for marketing, use web scraping to collect email ID and then send bulk emails.
+
+#Social Media Scraping: Web scraping is used to collect data from Social Media websites such as Twitter to find out what's trending.
+
