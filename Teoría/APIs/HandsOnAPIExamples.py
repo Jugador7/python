@@ -79,4 +79,10 @@ cherry = df2.loc[df2["name"] == 'Cherry']
 (cherry.iloc[0]['family']) , (cherry.iloc[0]['genus'])
 
 
+###########################################################################
 
+import requests
+jokes = requests.get("https://official-joke-api.appspot.com/jokes/ten")
+
+import json
+results = json.loads(jokes.text)
