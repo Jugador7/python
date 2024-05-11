@@ -48,3 +48,12 @@ driver.get("http://www.example.com")
 
 #Social Media Scraping: Web scraping is used to collect data from Social Media websites such as Twitter to find out what's trending.
 
+#######bank scraping
+
+import pandas as pd
+URL = 'https://en.wikipedia.org/wiki/List_of_largest_banks'
+tables = pd.read_html(URL)
+df = tables[0]
+print(df)
+
+
