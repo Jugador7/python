@@ -54,5 +54,33 @@ def helloworld():
 #Usage methods:
 #JSONify, make_response, redirect, abort
 
+@app.route("/")
+def hello_world():
+    res = make_response["Checkmate!"]
+    res.status_code = 201
+    return res
 
+#200 Request Successful
+#201 New Resource Created
+#202 Request Accepted, in process
+#204 Request completed, no response
+#400 Invalid request
+#401 Credentials missing or invalid
+#403 RCredentials not sufficient
+#404 Resource not found
+#405 Operation not supported
+#500 Unexpected error
 
+@app.route("/")
+def search_response():
+    query = request.args.get["q"]
+    if not query:
+        return {"error_message": "input parameter missing"},422
+    
+    #fetch the resource from the database
+    resource = fetch_from_database(query)
+
+    if resource:
+        return{"message": resource}
+    else:
+        return{"error message" : "Resource not found"}, 404
