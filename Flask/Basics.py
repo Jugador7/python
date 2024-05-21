@@ -70,6 +70,9 @@ if __name__ == '__main__':
 #SERVER_NAME
 #JSONIFY_MIMETYPE
 
+#curl -X GET -i -w '\n' localhost:5000
+#The -X argument specifies the GET command, and the -i argument displays the header from the response.
+
 #LoadApp configuration
 
 app.config["SECRET_KEY"] = "random-secret-key"
