@@ -1,0 +1,64 @@
+Lenguaje de programación de alto nivel
+- Alto nivel
+- Usa el patrón MVC
+- Construye aplicaciones rápida y eficientemente
+- Desarrollo rápido y reutilizable
+
+Aplicaciones:
+- Web como CMS, redes sociales, aplicaciones de negocio, nuevas páginas Web. 
+- Incluye pilas: Naturaleza comprehensiva de su framework
+- Funcionalidades y features. 
+
+Capa ORM:
+- Object-Relational-Mapping
+- Define modelos de datos. 
+- Se puede trabajr con BD fácilemnte
+
+Plantilla:
+- Viene con un montor de plantillas
+- Separa la logica de negocio de la de presentación 
+
+Adminsitración:
+- Auto-generada
+- User friendly
+- Personalizable
+
+Seguridad:
+-XSS (cross site scripting)
+-CSRF (Cross site request forgery)
+-SQL Injection
+-Password Hashing
+-User session
+-Manage user accounts
+Provee controles para definir permisos y restringir accesos
+
+Modules:
+- Apps or packages/ reusables para sumar funcionalidades puntuales
+- Ex: Language localization = gettext
+- Django Simple Captcha para Captcha
+- Forms. 
+
+Arquitectura:
+- Instancias independientes de arquitectura
+- Share nothing o stateless
+
+Autonomous request and response
+- No comparte recursos
+- No hay estado del servidor entre consultas
+
+Esacalabilidad: Papas porque es stateless (sesiones de usuario)
+
+Tests: Unitarias, de integración, funcional
+Test runner: Corre pruebas rápido, reportes detallados, testea utilidades, insertions y fictures
+
+Puede correr en muchas plataformas al ser de Python. Corre en casi todas las plataformas de la nube. 
+
+Comunidad dedicada de usuarios. Constantes mejoras y seguridad
+
+Apps famosas en Django: Instagram, Spotify, Youtube y el CMS del Washington Post. 
+
+
+
+
+
+
