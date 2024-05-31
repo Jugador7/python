@@ -1,0 +1,10 @@
+Class diagram
+Diagrama de clases
+
+X-RayTech<------Medical personnel------> Nurse 
+takeXRay()<------------Name------------> callPatient() 
+X-RayTech<-----------Address---------> takeVitals() 
+                         |  
+                     Doctir
+                makeDiagnosis()
+                  getTestResults()
