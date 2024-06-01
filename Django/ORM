@@ -1,0 +1,11 @@
+  Devs need to integrate SQL with programming languages using database APIs
+
+                          APP CODE
+                                     /\
+Assemble SQL      |                  |    Cursor objects
+                  v
+                      Database APIs
+                                    /\
+Execute SQL      |                  |        Rows
+                 v
+                          RDBMS
