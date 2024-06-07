@@ -9,6 +9,7 @@ source djangoenv/bin/activate
 pip install Django psycopg2-binary
 
 python3 manage.py makemigrations crud
+python3 manage.py makemigrations related_objects
 
 Esto nos debe dejar ver que se crearon las tablas que necesitamos. 
 
