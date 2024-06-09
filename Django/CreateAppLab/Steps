@@ -1,0 +1,122 @@
+1. Install packages:
+
+pip install --upgrade distro-info
+pip3 install --upgrade pip==23.2.1
+pip install virtualenv
+virtualenv djangoenv
+source djangoenv/bin/activate
+
+2. Install djangoenv
+
+pip install Django
+
+3. Create first django app. A folder called firstproject will be created which is a container wrapping up settings and configurations for a Django project.
+
+django-admin startproject firstproject
+
+4. Change directory to the first project
+
+cd firstproject
+
+5. Create django app within the project 
+
+python3 manage.py startapp firstapp
+
+manage.py is a command-line interface used to interact with the Django project to perform tasks such as starting the server,
+migrating models, and so on.
+firstproject/settings.py contains the settings and configurations information.
+firstproject/urls.py contains the URL and route definitions of your Django apps within the project.
+
+firstapp/admin.py: is for building an admin site
+firstapp/models.py: contains model classes
+firstapp/views.py: contains view functions/classes
+firstapp/urls.py: contains URL declarations and routing for the app
+firstapp/apps.py: contains configuration meta data for the app
+firstapp/migrations/: model migration scripts folder
+
+6. Before starting the app, you will to perform migrations to create necessary database tables:
+
+python3 manage.py makemigrations
+
+7. Run migration
+
+python3 manage.py migrate
+
+8. Start development server
+
+python3 manage.py runserver
+
+9. Find INSTALLED_APPS section, and add a new app entry as
+
+'firstapp.apps.FirstappConfig',
+
+10. Create an empty urls.py under firstapp folder
+
+cd firstapp # Make sure you are in firstapp directory
+touch urls.py
+
+11. Also import the flowing in that urls.py
+
+from django.urls import include, path
+
+12. Add new paths
+
+path('firstapp/', include('firstapp.urls')),
+path('', include('firstapp.urls')),  # Add this line to match the empty path
+
+13. Open views.py 
+
+from django.http import HttpResponse
+
+def index(request):
+    # Create a simple html page as a string
+    template = "<html>" \
+                "This is your first view" \
+               "</html>"
+    # Return the template as content argument in HTTP response
+    return HttpResponse(content=template)
+
+14. Open firstapp/urls.py
+
+from django.urls import path
+from . import views
+urlpatterns = [
+    # Create a path object defining the URL pattern to the index view
+    path(route='', view=views.index, name='index'),
+]
+
+15. Ejecutar 
+cd ..
+python3 manage.py runserver
+
+
+Dockerizar:
+
+1. En settings.py 
+
+ALLOWED_HOSTS = ['*','.us-south.codeengine.appdomain.cloud']
+
+2. Execute on terminal 
+
+pip install pipreqs
+pipreqs .
+
+3. Create docker file 
+
+> Dockerfile
+
+4. Put this in dockerfile
+
+# syntax=docker/dockerfile:1
+FROM python:3
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+COPY . /code/
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+5. Command to create docker image 
+
+docker build . -t my-django-app:latest && docker run -e PYTHONUNBUFFERED=1 -p  8000:8000 my-django-app 
