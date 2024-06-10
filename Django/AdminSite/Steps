@@ -3,6 +3,30 @@ After setup:
 1. Create super user
 python3 manage.py createsuperuser
 
-2. Include this un admin.py:
+2. Start dev server
+python3 manage.py runserver
+
+3. Include this in admin.py:
 admin.site.register(Course)
 admin.site.register(Instructor)
+
+4. Incude the models to change fields
+
+from django.contrib import admin
+from .models import Course, Instructor, Lesson
+
+class LessonInline(admin.StackedInline):
+    model = Lesson 
+    extra = 5
+
+class CourseAdmin(admin.ModelAdmin):
+    fields = ['pub_date', 'name', 'description']
+    inlines = [LessonInline]
+
+class InstructorAdmin(admin.ModelAdmin):
+     fields = ['user', 'full_time']
+
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Instructor, InstructorAdmin)
+
+
