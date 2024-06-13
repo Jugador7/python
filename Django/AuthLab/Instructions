@@ -1,0 +1,175 @@
+#1. Ensure installation
+
+pip install --upgrade distro-info
+pip3 install --upgrade pip==23.2.1
+pip install virtualenv
+virtualenv djangoenv
+source djangoenv/bin/activate
+pip install -U -r requirements.txt
+
+#2. Perform migrations to create necessary tables:
+python manage.py makemigrations
+
+#3. Run migration to activate models for onlinecourse app.
+python3 manage.py migrate
+
+#4. Start dev server
+python3 manage.py runserver
+
+
+#5. Create super user 
+DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@example.com DJANGO_SUPERUSER_PASSWORD=admin python manage.py createsuperuser --noinput
+
+#6. Put this in course_list
+{% if user.is_authenticated %}
+<p>Username: {{user.username}}, First name: {{user.first_name}}, Last name: {{user.last_name}} </p>
+{% endif %}
+
+#In the template, the user object will be queried by Django automatically for you based on the session_id created after login, and it will be available to both templates and views.
+
+#Then, we will check if the user is authenticated or if it is an anonymous user by using a if tag {% if user.is_authenticated %} and display the profile such as first name, last name, email, etc if authenticated.
+
+#7. The BELOW code block adds a dropdown button to display the user’s first name. When you hover the button, it pops up a link referring to a logout view.
+
+{% if user.is_authenticated %}
+<div class="rightalign">
+       <div class="dropdown">
+           <button class="dropbtn">{{user.first_name}}</button>
+           <div class="dropdown-content">
+                <a href="{% url 'onlinecourse:logout' %}">Logout</a>
+           </div>
+       </div>
+</div>
+{% endif %}
+
+#8. Open onlinecourse/views.py, add a function-based logout view under the comment # Create authentication related views
+
+def logout_request(request):
+    # Get the user object based on session id in request
+    print("Log out the user `{}`".format(request.user.username))
+    # Logout user in the request
+    logout(request)
+    # Redirect user back to course list view
+    return redirect('onlinecourse:popular_course_list')
+
+#9. Configure a route for logout_request view by adding a path entry in urlpatterns:
+
+path('logout/', views.logout_request, name='logout'),
+
+#10. Here, we added a {% else %} tag to handle the scenario when user is not authenticated and also created a new dropdown button with a link pointing to a login view.
+
+#The login view should return a common login page asking for user credential such as username and password.
+
+{% if user.is_authenticated %}
+    <div class="rightalign">
+        <div class="dropdown">
+            <button class="dropbtn">{{user.first_name}}</button>
+            <div class="dropdown-content">
+                <a href="{% url 'onlinecourse:logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="rightalign">
+        <div class="dropdown">
+            <button class="dropbtn">Visitor</button>
+            <div class="dropdown-content">
+                <a href="{% url 'onlinecourse:login' %}">Login</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+#11. Add login form 
+<form action="{% url 'onlinecourse:login' %}"  method="post">
+  {% csrf_token %}
+  <div class="container">
+    <h1>Login</h1>
+    <label for="username"><b>User Name</b></label>
+    <input type="text" placeholder="Enter User Name: " name="username" required>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password: " name="psw" required>
+    <div>
+      <button class="button" type="submit">Login</button>
+    </div>
+  </div>
+</form>
+
+#11. Add view of the form
+def login_request(request):
+    context = {}
+    # Handles POST request
+    if request.method == "POST":
+        # Get username and password from request.POST dictionary
+        username = request.POST['username']
+        password = request.POST['psw']
+        # Try to check if provide credential can be authenticated
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            # If user is valid, call login method to login current user
+            login(request, user)
+            return redirect('onlinecourse:popular_course_list')
+        else:
+            # If not, return to login page again
+            return render(request, 'onlinecourse/user_login.html', context)
+    else:
+        return render(request, 'onlinecourse/user_login.html', context)
+    
+#12. Add login path
+path('login/', views.login_request, name='login'),
+
+13. Add registration view: 
+def registration_request(request):
+    context = {}
+    # If it is a GET request, just render the registration page
+    if request.method == 'GET':
+        return render(request, 'onlinecourse/user_registration.html', context)
+    # If it is a POST request
+    elif request.method == 'POST':
+        # Get user information from request.POST
+        username = request.POST['username']
+        password = request.POST['psw']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        user_exist = False
+        try:
+            # Check if user already exists
+            User.objects.get(username=username)
+            user_exist = True
+        except:
+            # If not, simply log this is a new user
+            logger.debug("{} is new user".format(username))
+        # If it is a new user
+        if not user_exist:
+            # Create user in auth_user table
+            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
+                                            password=password)
+            # Login the user and redirect to course list page
+            login(request, user)
+            return redirect("onlinecourse:popular_course_list")
+        else:
+            return render(request, 'onlinecourse/user_registration.html', context)
+        
+#14. Add registration form:
+<form action="{% url 'onlinecourse:registration' %}" method="post">
+  <div class="container">
+    <h1>Sign Up</h1>
+    <hr>
+    <label for="username"><b>User Name</b></label>
+    <input type="text" placeholder="Enter User Name: " name="username" required>
+    <label for="firstname"><b>First Name</b></label>
+    <input type="text" placeholder="Enter First Name: " name="firstname" required>
+    <label for="lastname"><b>Last Name</b></label>
+    <input type="text" placeholder="Enter Last Name: " name="lastname" required>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password: " name="psw" required>
+    <div>
+        {% csrf_token %}
+        <button class="button" type="submit">Sign Up</button>
+    </div>
+  </div>
+</form>
+
+#15. Add route
+path('registration/', views.registration_request, name='registration'),
+
