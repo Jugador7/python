@@ -1,0 +1,77 @@
+1. Ensure pip is installed.
+
+python3.11 -m ensurepip
+
+2. Ensure Django is installed if not install: python3.11 -m pip install Django
+
+django-admin startproject customer360
+
+3. Run migration before running the application for the first time.
+
+python3.11 manage.py migrate
+
+4. Run the server successfully this time.
+
+python3.11 manage.py runserver
+
+5. Go to settings.py To be able to use path property. You need to import the os module. Add an import statement near the top of the file after from pathlib...
+
+from pathlib import Path
+import os
+
+6. This setting defines the additional locations the staticfiles app will traverse if the FileSystemFinder finder is enabled, for example, if you use the collectstatic or findstatic management command or use the static file serving view.
+
+For clarity, add it after STATIC_URL.
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,"static/"),
+)
+
+Task 2: Create Models
+
+Task 3: Create Templates
+
+Task 4: Create Views
+
+Task 5: Create URLs
+
+Task 6: Add Styling
+
+Task 7: Run the Application
+
+cd /home/project/customer360
+python manage.py makemigrations customer360
+python manage.py migrate
+python manage.py runserver
+
+- In the Customer model, add a new optional field called social_media. And display it with customer details.
+
+social_media = models.CharField(max_length=100, blank=True)
+
+- Now you need to ensure that the new field social_media is added to the customer create form.
+
+<div class="form-group">
+    <label for="Field">Field Label </label>
+    <input type="Type" name="Name">
+</div>
+
+- And that the social_media field is added in the grid on the landing page.
+
+<th>Social Media</th>
+...
+<td>{{customer.social_media }}</td>
+
+- Add the code for posting as a Social media text
+
+social_media=request.POST["social_media"]
+
+- Create a new Customer object using the Customer.objects.create() method
+
+customer = Customer.objects.create(name=name,email=email,phone=phone,address=address,social_media=social_media)
+
+- This change is only in one place. Can you figure out where this should be?
+
+('social_media', 'Social Media'),
+
+- To apply these model changes, you need to run certain procedures. These procedures will apply the model changes to your database.
+
