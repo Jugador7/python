@@ -20,3 +20,14 @@ df = pd.read_csv(file_name)
 df = pd.read_csv(file_name, header=None)
 print(df.head())
 
+headers = ["Manufacturer", "Category", "Screen", "GPU", "OS", "CPU_core", "Screen_Size_inch", "CPU_frequency", "RAM_GB", "Storage_GB_SSD", "Weight_kg", "Price"]
+df.columns = headers
+print(df.head(10))
+
+df.replace('?',np.nan, inplace = True)
+
+df.dtypes
+
+df.describe(include="all")
+
+print(df.info())
