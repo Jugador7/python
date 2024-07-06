@@ -37,3 +37,10 @@ Note that we can update the `Screen_Size_cm` column such that all values are rou
 df[['Screen_Size_cm']] = np.round(df[['Screen_Size_cm']],2)
 df.head()
 
+# replacing missing data with mean
+avg_weight=df['Weight_kg'].astype('float').mean(axis=0)
+df["Weight_kg"].replace(np.nan, avg_weight, inplace=True)
+
+# astype() function converts the values to the desired data type
+# axis=0 indicates that the mean value is to calculated across all column elements in a row.
+
