@@ -44,3 +44,10 @@ df["Weight_kg"].replace(np.nan, avg_weight, inplace=True)
 # astype() function converts the values to the desired data type
 # axis=0 indicates that the mean value is to calculated across all column elements in a row.
 
+# replacing missing data with mode
+common_screen_size = df['Screen_Size_cm'].value_counts().idxmax()
+df["Screen_Size_cm"].replace(np.nan, common_screen_size, inplace=True)
+
+#Fixing the data types
+df[["Weight_kg","Screen_Size_cm"]] = df[["Weight_kg","Screen_Size_cm"]].astype("float")
+
