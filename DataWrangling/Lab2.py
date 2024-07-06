@@ -51,3 +51,29 @@ df["Screen_Size_cm"].replace(np.nan, common_screen_size, inplace=True)
 #Fixing the data types
 df[["Weight_kg","Screen_Size_cm"]] = df[["Weight_kg","Screen_Size_cm"]].astype("float")
 
+CPU_frequency
+
+# Write your code below and press Shift+Enter to execute
+df['CPU_frequency'] = df['CPU_frequency']/df['CPU_frequency'].max()
+
+# Write your code below and press Shift+Enter to execute
+bins = np.linspace(min(df["Price"]), max(df["Price"]), 4)
+group_names = ['Low', 'Medium', 'High']
+df['Price-binned'] = pd.cut(df['Price'], bins, labels=group_names, include_lowest=True )
+
+#Indicator Variable: Screen
+dummy_variable_1 = pd.get_dummies(df["Screen"])
+dummy_variable_1.rename(columns={'IPS Panel':'Screen-IPS_panel', 'Full HD':'Screen-Full_HD'}, inplace=True)
+df = pd.concat([df, dummy_variable_1], axis=1)
+
+# drop original column "Screen" from "df"
+df.drop("Screen", axis = 1, inplace=True)
+
+
+#Indicator Variable: Screen
+dummy_variable_1 = pd.get_dummies(df["Screen"])
+dummy_variable_1.rename(columns={'IPS Panel':'Screen-IPS_panel', 'Full HD':'Screen-Full_HD'}, inplace=True)
+df = pd.concat([df, dummy_variable_1], axis=1)
+
+# drop original column "Screen" from "df"
+df.drop("Screen", axis = 1, inplace=True)
