@@ -1,0 +1,27 @@
+import piplite
+await piplite.install('seaborn')
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+%matplotlib inline
+
+from pyodide.http import pyfetch
+
+async def download(url, filename):
+    response = await pyfetch(url)
+    if response.status == 200:
+        with open(filename, "wb") as f:
+            f.write(await response.bytes())
+
+filepath="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DA0101EN-Coursera/laptop_pricing_dataset_mod2.csv"
+
+await download(filepath, "laptops.csv")
+file_name="laptops.csv"
+
+df = pd.read_csv(file_name, header=0)
+
+df.head(5)
+
